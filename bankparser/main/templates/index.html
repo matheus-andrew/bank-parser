@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Statement Parser</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to external stylesheet -->
+</head>
+<body>
+<div class="container">
+    <h1>Bank Statement Parser</h1>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Radio Buttons for Parser Type -->
+        <div class="radio-group">
+            <label class="radio-option">
+                <input type="radio" name="parser_type" value="maybank" required
+                    {% if parser_type == 'maybank' %}checked{% endif %}>
+                Maybank
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="parser_type" value="bca"
+                    {% if parser_type == 'bca' %}checked{% endif %}>
+                BCA
+            </label>
+        </div>
+        <!-- Textarea Input -->
+        <textarea name="transaction_data" placeholder="Paste your bank transaction data here...">{{ input_data }}</textarea>
+        <!-- Parse Button -->
+        <button type="submit" class="submit-btn">Parse Data</button>
+    </form>
+
+    <!-- Results Table -->
+    {% if transactions %}
+        <div class="table-container">
+            <table class="result-table">
+                <!-- Table Headers -->
+                <thead>
+                    <tr>
+                        {% if parser_type == 'maybank' %}
+                            <th>Tanggal Penggunaan</th>
+                            <th>Tanggal Cetak</th>
+                            <th>Description</th>
+                            <th>Location</th>
+                            <th>Country</th>
+                            <th>Amount</th>
+                            <th>Credit</th>
+                        {% else %}
+                            <th>Transaction Date</th>
+                            <th>Posting Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Credit</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <!-- Transaction Data -->
+                <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            {% if parser_type == 'maybank' %}
+                                <td>{{ transaction.tanggal_penggunaan }}</td>
+                                <td>{{ transaction.tanggal_cetak }}</td>
+                                <td>{{ transaction.description }}</td>
+                                <td>{{ transaction.location }}</td>
+                                <td>{{ transaction.country }}</td>
+                                <td>{{ transaction.amount }}</td>
+                                <td>{{ transaction.credit }}</td>
+                            {% else %}
+                                <td>{{ transaction.transaction_date }}</td>
+                                <td>{{ transaction.posting_date }}</td>
+                                <td>{{ transaction.description }}</td>
+                                <td>{{ transaction.amount }}</td>
+                                <td>{{ transaction.is_credit }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+
+{% load static %}
+<script src="{% static 'script.js' %}"></script> <!-- Link to external JavaScript -->
+</body>
+</html>

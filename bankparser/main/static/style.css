@@ -1,0 +1,126 @@
+/* General Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #64b3f4, #c2e59c);
+}
+
+/* Main Container */
+.container {
+    background-color: white;
+    width: 90%;
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Prevent sudden overflow */
+    transition: all 0.5s ease-in-out; /* Smooth growth when the table appears */
+}
+
+/* Title */
+h1 {
+    color: #333;
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 20px;
+}
+
+/* Form Container Wrap */
+form {
+    width: 100%; /* Ensures the form stretches full width of `.container` */
+    max-width: 600px; /* Fits within a readable size on larger screens */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Adds spacing between textarea and button */
+}
+
+/* Form Elements (Textarea and Button) */
+textarea {
+    display: block; /* Ensure it's a block-level element */
+    width: 100%; /* Take full width of form's max-width */
+    padding: 15px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    resize: vertical;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: monospace;
+    background: #f9f9f9;
+}
+
+/* Button Styling */
+.submit-btn {
+    width: auto; /* Keeps the button size dynamic to its content */
+    align-self: center; /* Aligns the button with its parent content */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s ease all;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Result Table Styling */
+.table-container {
+    width: 100%; /* Full width of container */
+    overflow: auto; /* Enable scrolling if content overflows horizontally or vertically */
+    margin-top: 20px;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.result-table th,
+.result-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.result-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.result-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Small Screen Adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .result-table th,
+    .result-table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
