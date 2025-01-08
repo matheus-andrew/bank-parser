@@ -30,8 +30,8 @@ class BCAParser:
     def parse_line(line: str) -> Transaction:
         # Split the first two dates
         parts = line.strip().split()
-        transaction_date = BCAParser.convert_date(parts[0])
-        posting_date = BCAParser.convert_date(parts[1])
+        transaction_date = parts[0]
+        posting_date = parts[1]
 
         # Check if the line ends with CR
         is_credit = line.strip().endswith('CR')
