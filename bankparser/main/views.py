@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from main.maybank_parser import MaybankParser
 from main.bca_parser import BCAParser
+from main.bri_parser import BRIParser
 import io
 
 def index(request):
@@ -29,8 +30,10 @@ def index(request):
                     if line.strip():
                         if parser_type == 'maybank':
                             transaction = MaybankParser.parse_line(line)
-                        else:
+                        elif parser_type == 'bca':
                             transaction = BCAParser.parse_line(line)
+                        else:
+                            transaction = BRIParser.parse_line(line)
                         transactions.append(transaction)
                 
                 context['transactions'] = transactions

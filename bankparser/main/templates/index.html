@@ -24,6 +24,11 @@
                     {% if parser_type == 'bca' %}checked{% endif %}>
                 BCA
             </label>
+            <label class="radio-option"></label>
+                <input type="radio" name="parser_type" value="bri"
+                    {% if parser_type == 'bri' %}checked{% endif %}>
+                BRI
+            </label>
         </div>
         <!-- Textarea Input -->
         <textarea name="transaction_data" placeholder="Paste your bank transaction data here...">{{ input_data }}</textarea>
@@ -46,11 +51,19 @@
                             <th>Country</th>
                             <th>Amount</th>
                             <th>Credit</th>
-                        {% else %}
+                        {% elif parser_type == 'bca' %}
                             <th>Transaction Date</th>
                             <th>Posting Date</th>
                             <th>Description</th>
                             <th>Amount</th>
+                            <th>Credit</th>
+                        {% else %}
+                            <th>Tanggal Transaksi</th>
+                            <th>Tanggal Pembukuan</th>
+                            <th>Keterangan</th>
+                            <th>Transaksi Valas</th>
+                            <th>Nilai Tukar</th>
+                            <th>Jumlah</th>
                             <th>Credit</th>
                         {% endif %}
                     </tr>
@@ -67,11 +80,19 @@
                                 <td>{{ transaction.country }}</td>
                                 <td>{{ transaction.amount }}</td>
                                 <td>{{ transaction.credit }}</td>
-                            {% else %}
+                            {% elif parser_type == 'bca' %}
                                 <td>{{ transaction.transaction_date }}</td>
                                 <td>{{ transaction.posting_date }}</td>
                                 <td>{{ transaction.description }}</td>
                                 <td>{{ transaction.amount }}</td>
+                                <td>{{ transaction.is_credit }}</td>
+                            {% else %}
+                                <td>{{ transaction.tgl_transaksi }}</td>
+                                <td>{{ transaction.tgl_pembukuan }}</td>
+                                <td>{{ transaction.keterangan }}</td>
+                                <td>{{ transaction.transaksi_valas }}</td>
+                                <td>{{ transaction.nilai_tukar }}</td>
+                                <td>{{ transaction.jumlah }}</td>
                                 <td>{{ transaction.is_credit }}</td>
                             {% endif %}
                         </tr>
